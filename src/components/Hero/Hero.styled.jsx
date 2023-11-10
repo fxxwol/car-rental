@@ -8,7 +8,7 @@ export const HeroSection = styled.section`
   background-size: contain;
   background-position: calc(50% + 480px);
   padding: 120px 0;
-  height: 768px;
+  height: 750px;
 `
 export const HeroTitle = styled.h1`
     font-size: 60px;
@@ -31,13 +31,13 @@ line-height: 160%;
 margin-bottom: 60px;
 
 &::after{
-    content: "";
+  content: "";
   position: absolute;
   right: 15px;
   bottom: -24px;
-width: 528px;
-height: 2px;
-background-color: ${variables.greyText};
+  width: 528px;
+  height: 2px;
+  background-color: ${variables.greyText};
 }
 
 `
