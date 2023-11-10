@@ -1,13 +1,14 @@
 import { Container } from '../../common/Container.styled';
+import { Logo } from '../../common/Logo.styled';
 import Navigation from '../Navigation/Navigation';
-import { Header, HeaderTitle } from './AppBar.styled';
+import { Header } from './AppBar.styled';
 
 function AppBar() {
 
     return (
         <Container>
             <Header>
-                <HeaderTitle to='/'>DrivEase</HeaderTitle>
+                <Logo to='/'>DrivEase</Logo>
                 <Navigation />
             </Header>
         </Container>

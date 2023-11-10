@@ -39,6 +39,7 @@ p {
 }
 a {
   text-decoration: none;
+  color: currentColor;
 }
 ul {
   list-style: none;
