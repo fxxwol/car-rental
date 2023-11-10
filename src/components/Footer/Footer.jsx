@@ -11,13 +11,13 @@ function Footer() {
           <FooterTitle>Contact us</FooterTitle>
           <Address>
             <ContactsWrapper>
-              <svg width={24} height={24}>
+              <svg width={20} height={20}>
                 <use href={`${sprite}#icon-email`} />
               </svg>
               <Link href="mLinkilto:driveLinkse@gmail.com">drivease@gmail.com</Link>
             </ContactsWrapper>
             <ContactsWrapper>
-              <svg width={24} height={24}>
+              <svg width={20} height={20}>
                 <use href={`${sprite}#icon-phone`} />
               </svg>
               <Link href="tel:+380985674355">+38 (098) 567 43 55</Link>

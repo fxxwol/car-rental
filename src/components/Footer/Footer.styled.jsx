@@ -24,14 +24,14 @@ export const FooterContainer = styled(Container)`
 export const Address = styled.address`
 display: flex;
 flex-direction: column;
-gap: 15px;
+gap: 10px;
 align-items: center;
 justify-content: center;
 `
 export const FooterTitle = styled.h3`
 color: ${variables.blackText};
   text-decoration: none;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 600;
 `
 
@@ -52,7 +52,7 @@ export const ContactsWrapper = styled.div`
 export const Wrapper = styled.div`
 display: flex;
 flex-direction: column;
-gap: 30px;
+gap: 20px;
 align-items: center;
 justify-content: center;
 `
@@ -68,8 +68,8 @@ export const SocialIcon = styled.a`
   border-radius: 40px;
 background-color: ${variables.blueText};
 display: flex;
-width: 45px;
-height: 45px;
+width: 35px;
+height: 35px;
 justify-content: center;
 align-items: center;
 transition: all 280ms cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -84,7 +84,7 @@ export const SocialWrapper = styled(Wrapper)`
 `
 
 export const Copyright = styled.div`
-  margin-top: 30px;
+  margin-top: 40px;
   text-align: center;
 `;
 
