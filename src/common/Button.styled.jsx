@@ -21,4 +21,5 @@ export const Button = styled.button`
 
 export const StyledLink = styled(Button).attrs({ as: 'a' })`
     text-decoration: none;
+    cursor: pointer;
 `

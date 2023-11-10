@@ -1,13 +1,14 @@
 import React from 'react'
-import { Address, Wrapper, ContactsWrapper, FooterContainer, FooterWrap, Link, LinksWrap, SocialIcon, SocialWrapper, FooterTitle, Copyright, CopyrightLink } from './Footer.styled'
-import { Logo } from '../../common/Logo.styled'
 import sprite from '../../img/sprite.svg'
+import { Address, ContactsWrapper, Copyright, CopyrightLink, FooterContainer, FooterTitle, FooterWrap, Link, LinksWrap, SocialIcon, SocialWrapper, Wrapper } from './Footer.styled'
+import Logo from '../../common/Logo/Logo'
 function Footer() {
   return (
     <FooterWrap>
       <FooterContainer>
+        <Logo size={115} />
         <Wrapper>
-          <Logo to='/'>DriveEase</Logo>
+          <FooterTitle>Contact us</FooterTitle>
           <Address>
             <ContactsWrapper>
               <svg width={24} height={24}>
@@ -34,17 +35,17 @@ function Footer() {
         <Wrapper>
           <FooterTitle>Follow Us</FooterTitle>
           <SocialWrapper>
-            <SocialIcon  target="_blank" href="https://twitter.com/?lang=uk">
+            <SocialIcon target="_blank" href="https://twitter.com/?lang=uk">
               <svg width={32} height={32}>
                 <use href={`${sprite}#icon-twitter`} />
               </svg>
             </SocialIcon>
-            <SocialIcon  target="_blank" href="https://www.instagram.com/">
+            <SocialIcon target="_blank" href="https://www.instagram.com/">
               <svg width={32} height={32}>
                 <use href={`${sprite}#icon-instagram`} />
               </svg>
             </SocialIcon>
-            <SocialIcon  target="_blank" href="https://www.youtube.com/">
+            <SocialIcon target="_blank" href="https://www.youtube.com/">
               <svg width={32} height={32}>
                 <use href={`${sprite}#icon-youtube`} />
               </svg>

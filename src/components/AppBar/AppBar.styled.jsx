@@ -5,5 +5,5 @@ export const Header = styled.header`
   height: 60px;
   justify-content: space-between;
   gap: 90px;
-  padding: 40px 0;
+  padding: 60px 0;
   `

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { Container } from "../../common/Container.styled";
 import variables from "../../common/Variables";
-import { Logo } from "../../common/Logo.styled";
 
 export const FooterWrap = styled.footer`
     padding: 30px 0;
@@ -29,8 +28,11 @@ gap: 15px;
 align-items: center;
 justify-content: center;
 `
-export const FooterTitle = styled(Logo)`
-    font-size: 25px;
+export const FooterTitle = styled.h3`
+color: ${variables.blackText};
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: 600;
 `
 
 export const Link = styled.a`
