@@ -19,6 +19,6 @@ export const Button = styled.button`
     }
 `
 
-export const StyledLink = styled(Button).attrs({ as: 'a' })`
+export const StyledLink = styled(Button).attrs({ as: 'Link' })`
     text-decoration: none;
 `
