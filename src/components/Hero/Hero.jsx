@@ -15,7 +15,7 @@ function Hero() {
             Choose from a wide range of cars that fit your style and budget. Experience the freedom of the open road with our reliable and efficient rental service.
           </HeroSubs>
         </HeroTextContainer>
-        <StyledLink width={150} height={60} to="/catalog">Find a car</StyledLink>
+        <StyledLink width={150} height={60} href="/catalog">Find a car</StyledLink>
       </Container>
     </HeroSection>
   )
