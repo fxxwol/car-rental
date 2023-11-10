@@ -1,15 +1,16 @@
+import { Container } from '../../common/Container.styled';
 import Navigation from '../Navigation/Navigation';
-import { Header, HeaderTitle, NavDiv } from './AppBar.styled';
+import { Header, HeaderTitle } from './AppBar.styled';
 
 function AppBar() {
 
     return (
-        <Header>
-            <NavDiv>
-                <HeaderTitle to='/'>DriveEase</HeaderTitle>
+        <Container>
+            <Header>
+                <HeaderTitle to='/'>DrivEase</HeaderTitle>
                 <Navigation />
-            </NavDiv>
-        </Header>
+            </Header>
+        </Container>
     );
 }
 

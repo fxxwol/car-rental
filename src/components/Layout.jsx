@@ -1,15 +1,19 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import AppBar from './AppBar/AppBar';
+import Footer from './Footer/Footer';
 
 function Layout() {
 
     return (
         <>
             <AppBar />
-            <Suspense>
-                <Outlet />
-            </Suspense>
+            <main>
+                <Suspense >
+                    <Outlet />
+                </Suspense>
+            </main>
+            <Footer />
         </>
     );
 }

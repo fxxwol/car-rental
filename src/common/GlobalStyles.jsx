@@ -1,6 +1,7 @@
 import 'modern-normalize';
 import { createGlobalStyle } from 'styled-components'
-import Manrope from './fonts/Manrope.woff2';
+import variables from './Variables';
+import Manrope from '../fonts/Manrope.woff2';
 
 
 export const GlobalStyle = createGlobalStyle`
@@ -22,6 +23,7 @@ body {
   font-family: "Manrope", sans-serif;
   font-weight: 400;
   font-style: normal;
+  color: ${variables.blackText};
   width: 100%;
   height: 100vh;
   margin: 0;
@@ -50,6 +52,8 @@ img {
 }
 button {
   cursor: pointer;
+  padding: 0;
+  border: 0;
 }
 html {
   scroll-behavior: smooth;
