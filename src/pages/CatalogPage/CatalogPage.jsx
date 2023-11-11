@@ -7,22 +7,24 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllCars } from '../../redux/carSlice/carsThunk'
 import { selectHasMore, selectLoading, selectPage } from '../../redux/carSlice/selectors'
 import LoadMore from '../../components/LoadMore/LoadMore'
+import  Loader  from '../../components/Loader/Loader'
 
 function CatalogPage() {
   const dispatch = useDispatch()
   const isLoading = useSelector(selectLoading)
   const page = useSelector(selectPage)
   const hasMore = useSelector(selectHasMore)
-  
+
   useEffect(() => {
-    dispatch(fetchAllCars(page))
+    dispatch(fetchAllCars(page));
   }, [dispatch, page])
 
   return (
     <CatalogSection>
       <Container>
         <Filter />
-        {!isLoading && <CarsList />}
+        {isLoading ? <Loader />
+          : <CarsList />}
         {hasMore && <LoadMore />}
       </Container>
     </CatalogSection>

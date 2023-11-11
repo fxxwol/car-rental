@@ -28,9 +28,15 @@ export const carsSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchAllCars.fulfilled, (state, { payload }) => {
+                let updatedCars;
+                if (state.page === 1) {
+                    updatedCars = [...payload];
+                } else {
+                    updatedCars = [...state.cars, ...payload];
+                }
                 return {
                     ...state,
-                    cars: [...payload],
+                    cars: updatedCars,
                     isLoading: false,
                     hasMore: payload.length === state.limit
                 }
