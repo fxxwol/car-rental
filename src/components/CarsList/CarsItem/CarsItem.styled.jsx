@@ -19,6 +19,7 @@ border-radius: 12px;
 export const ImgWrap = styled.div`
     margin-bottom: 14px;
     width: 100%;
+    position: relative;
 `
 
 export const CardTitle = styled.div`
@@ -64,3 +65,18 @@ font-size: 12px;
 font-weight: 400;
 line-height: 150%;
 `;
+
+export const HeartBtn = styled.button`
+position: absolute;
+  margin: 0;
+  top: 14px;
+  right: 14px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+`
+export const HeartIcon = styled.svg`
+display: block;
+  width: 18px;
+  height: 18px;
+`

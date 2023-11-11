@@ -14,7 +14,7 @@ export const Button = styled.button`
     height: ${(props) => (props.height || 48)}px;
     transition: background-color 280ms cubic-bezier(0.075, 0.82, 0.165, 1);
 
-    &:hover{
+    &:hover, :focus{
         background-color: ${variables.accentColor};
     }
 `

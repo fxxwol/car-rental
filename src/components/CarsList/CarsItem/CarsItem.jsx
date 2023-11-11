@@ -1,17 +1,44 @@
-import React from 'react'
-import { CarImg, CarModel, CardTitle, DescText, Description, ImgWrap, Item, TitleMain } from './CarsItem.styled'
+import React, { useState } from 'react'
+import { CarImg, CarModel, CardTitle, DescText, Description, HeartBtn, HeartIcon, ImgWrap, Item, TitleMain } from './CarsItem.styled'
 import variables from '../../../common/Variables'
 import { Button } from "../../../common/Button.styled"
+import sprite from '../../../img/sprite.svg'
+import Modal from '../../Modal/Modal'
 
 function CarsItem({ car }) {
+    const [isClicked, setIsClicked] = useState(false)
     const { img, make, model, year, address, rentalPrice, rentalCompany, id, functionalities } = car
     const addressParts = address.split(', ');
     const city = addressParts[1];
     const country = addressParts[2];
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const handleFavorite = () => {
+        setIsClicked(prev => !prev)
+    }
 
     return (
         <Item>
             <ImgWrap>
+                <HeartBtn onClick={handleFavorite}>
+                    {isClicked ?
+                        <HeartIcon>
+                            <use href={`${sprite}#icon-activeheart`} />
+                        </HeartIcon> :
+                        <HeartIcon>
+                            <use href={`${sprite}#icon-normalheart`} />
+                        </HeartIcon>
+                    }
+
+                </HeartBtn>
                 <CarImg src={img} alt={`${make} ${model} ${year}`} />
             </ImgWrap>
             <CardTitle>
@@ -23,7 +50,7 @@ function CarsItem({ car }) {
                     </CarModel>
                     {year}
                 </TitleMain>
-                {rentalPrice}
+                {rentalPrice}$
             </CardTitle>
             <Description>
                 <DescText>{city}</DescText>
@@ -34,9 +61,10 @@ function CarsItem({ car }) {
                 <DescText>{id}</DescText>
                 <DescText>{functionalities[0]}</DescText>
             </Description>
-            <Button type="button" width={274} height={44}>
+            <Button type="button" width={274} height={44} onClick={openModal}>
                 Learn more
             </Button>
+            {isModalOpen && <Modal onClose={closeModal} car={car} />}
         </Item>
     )
 }
