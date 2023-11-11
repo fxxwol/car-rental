@@ -15,6 +15,8 @@ import {
     ModelInput,
     OptionList,
     OptionListItem,
+    PlaceholderLeft,
+    PlaceholderRight,
     PriceDropdown,
     PriceInput
 } from './Filter.styled';
@@ -135,17 +137,19 @@ const Filter = () => {
                 <InputBlock>
                     <Label htmlFor="mileageTitle">Сar mileage / km </Label>
                     <MileageInputWrapper>
+                        <PlaceholderLeft>From</PlaceholderLeft>
                         <MileageInputLeft
                             id="mileageTitle"
-                            placeholder="From"
                             onChange={handleChangeStartMiles}
+                            type='number'
                             value={startMiles}
-                    />
+                        />
+                        <PlaceholderRight>To</PlaceholderRight>
                         <MileageInputRight
                             id="mileageTitle"
+                            type='number'
                             value={endMiles}
                             onChange={handleChangeEndMiles}
-                            placeholder="To"
                         />
                     </MileageInputWrapper>
                 </InputBlock>

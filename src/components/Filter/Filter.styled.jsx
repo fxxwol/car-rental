@@ -158,32 +158,41 @@ export const MileageInputWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 export const MileageInputLeft = styled(Input)`
   width: 160px;
+  padding-left: 62px;
   border-radius: 0;
   border-top-left-radius: 14px;
   border-bottom-left-radius: 14px;
   border-right: 1px solid rgba(138, 138, 137, 0.20);
   cursor: text;
-  text-indent: 51px;
-
-
-  &::placeholder{
-    text-indent: 0;
-  }
   `;
+
+export const PlaceholderLeft = styled.span`
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 111.111%;
+  `
+export const PlaceholderRight = styled.span`
+    position: absolute;
+    top: 14px;
+    left: 174px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 111.111%;
+  `
 
 export const MileageInputRight = styled(Input)`
   width: 160px;
   border-radius: 0;
+  padding-left: 40px;
   border-top-right-radius: 14px;
   border-bottom-right-radius: 14px;
   cursor: text;
-  text-indent: 29px;
-
-  &::placeholder{
-    text-indent: 0;
-  }
 `;
