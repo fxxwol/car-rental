@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '../../common/Button.styled';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     ArrowBtn,
     ArrowDown,
@@ -21,14 +22,17 @@ import {
     PriceInput
 } from './Filter.styled';
 import { models } from './modelOptions';
+import { selectFilters } from '../../redux/carSlice/selectors';
+import { setFilters } from '../../redux/carSlice/slice';
 
 const Filter = () => {
-    const [model, setModel] = useState('');
-    const [price, setPrice] = useState('');
-    const [startMiles, setStartMiles] = useState('');
-    const [endMiles, setEndMiles] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+    const dispatch = useDispatch()
+    const filters = useSelector(selectFilters)
+    const minPrice = 30;
+    const maxPrice = 500;
+    const step = 10;
 
     function createArrayWithStep(number, step) {
         const resultArray = [];
@@ -37,35 +41,23 @@ const Filter = () => {
         }
         return resultArray;
     }
-    const minPrice = 30;
-    const maxPrice = 500;
-    const step = 10;
+
     const priceOptions = createArrayWithStep(maxPrice, step)
         .filter(item => item >= minPrice)
         .map(item => ({ label: item, value: item }));
 
-    const handleChangeModel = event => {
-        setModel(event.target.value);
-        setIsDropdownOpen(false);
-    };
     const handleSelectModel = selectedModel => {
-        setModel(selectedModel);
+        dispatch(setFilters({
+            make: selectedModel
+        }))
         setIsDropdownOpen(false);
     };
 
-    const handleChangePrice = event => {
-        setPrice(event.target.value);
-    };
     const handleSelectPrice = selectedPrice => {
-        setPrice(selectedPrice);
+        dispatch(setFilters({
+            rentalPrice: selectedPrice
+        }))
         setIsDropdownOpen(false);
-    };
-
-    const handleChangeStartMiles = event => {
-        setStartMiles(event.target.value);
-    };
-    const handleChangeEndMiles = event => {
-        setEndMiles(event.target.value);
     };
 
     const toggleDropdown = dropdownType => {
@@ -76,6 +68,10 @@ const Filter = () => {
         }
     };
 
+    const handleSearch = () => {
+
+    }
+
     return (
         <FilterSectionContainer>
             <InputsBlock>
@@ -85,10 +81,8 @@ const Filter = () => {
                         id="modelTitle"
                         readOnly
                         placeholder="Enter the text"
-                        onChange={handleChangeModel}
-                        value={model}
-                    >
-                    </ModelInput>
+                        value={filters.make}
+                    />
                     <ArrowBtn type="button" onClick={() => toggleDropdown('model')}>
                         {isDropdownOpen === 'model' ? <ArrowUp /> : <ArrowDown />}
                     </ArrowBtn>
@@ -113,8 +107,7 @@ const Filter = () => {
                         id="priceTitle"
                         placeholder="To $"
                         readOnly
-                        onChange={handleChangePrice}
-                        value={price}
+                        value={filters.rentalPrice}
                     />
                     <ArrowBtn type="button" onClick={() => toggleDropdown('price')}>
                         {isDropdownOpen === 'price' ? <ArrowUp /> : <ArrowDown />}
@@ -140,20 +133,24 @@ const Filter = () => {
                         <PlaceholderLeft>From</PlaceholderLeft>
                         <MileageInputLeft
                             id="mileageTitle"
-                            onChange={handleChangeStartMiles}
+                            onChange={(e) => dispatch(setFilters({
+                                startMileage: e.target.value
+                            }))}
                             type='number'
-                            value={startMiles}
+                            value={filters.startMileage}
                         />
                         <PlaceholderRight>To</PlaceholderRight>
                         <MileageInputRight
                             id="mileageTitle"
                             type='number'
-                            value={endMiles}
-                            onChange={handleChangeEndMiles}
+                            value={filters.endMileage}
+                            onChange={(e) => dispatch(setFilters({
+                                endMileage: e.target.value
+                            }))}
                         />
                     </MileageInputWrapper>
                 </InputBlock>
-                <Button type='button'>
+                <Button type='button' onClick={handleSearch}>
                     Search
                 </Button>
             </InputsBlock>
