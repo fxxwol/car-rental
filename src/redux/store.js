@@ -17,13 +17,24 @@ import { favoriteSlice } from './favoriteSlice/slice';
 
 const favoritePersistConfig = {
     key: 'favorite',
-    storage
+    storage,
+    transforms: [
+        {
+            in: (state) => {
+                return msgpack.encode(state);
+            },
+            out: (state) => {
+                return msgpack.decode(state);
+            },
+        },
+    ],
+    stateReconciler: autoMergeLevel2,
 };
 
 const carsPersistConfig = {
     key: 'car',
     storage,
-    whitelist: ['filteredCars', 'isFiltered', 'filters'],
+    whitelist: ['filteredCars', 'isFiltered', 'filters', 'page'],
     transforms: [
         {
             in: (state) => {

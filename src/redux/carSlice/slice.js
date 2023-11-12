@@ -18,7 +18,6 @@ export const carsSlice = createSlice({
         error: null,
         page: 1,
         limit: 12,
-        hasMore: true,
     },
     reducers: {
         setFilters: (state, action) => {
@@ -40,17 +39,10 @@ export const carsSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchCarsPage.fulfilled, (state, { payload }) => {
-                let updatedCars;
-                if (state.page === 1) {
-                    updatedCars = [...payload];
-                } else {
-                    updatedCars = [...state.cars, ...payload];
-                }
                 return {
                     ...state,
-                    cars: updatedCars,
+                    cars: [...payload],
                     isLoading: false,
-                    hasMore: payload.length === state.limit
                 }
             })
             .addCase(fetchCarsPage.pending, (state) => {

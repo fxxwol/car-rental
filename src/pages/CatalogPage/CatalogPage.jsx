@@ -9,27 +9,22 @@ import {
   selectAllCars,
   selectFilteredCars,
   selectFilters,
-  selectHasMore,
   selectLoading,
   selectPage,
   selectPageCars,
   selectisFiltered,
 } from "../../redux/carSlice/selectors";
-import LoadMore from "../../components/LoadMore/LoadMore";
 import Loader from "../../components/Loader/Loader";
 import NoCarsFound from "../../components/NoCars/NoCars";
-import {
-  setFilteredCars,
-  setFilters,
-} from "../../redux/carSlice/slice";
+import { setFilteredCars, setFilters } from "../../redux/carSlice/slice";
 import { setIsFiltered } from "../../redux/carSlice/slice";
+import Pagination from "../../components/Pagination/Pagination";
+
 function CatalogPage() {
   const dispatch = useDispatch();
-
   const isLoading = useSelector(selectLoading);
   const page = useSelector(selectPage);
   const allCars = useSelector(selectAllCars);
-  const hasMore = useSelector(selectHasMore);
   const cars = useSelector(selectPageCars);
   const isFiltered = useSelector(selectisFiltered);
   const filters = useSelector(selectFilters);
@@ -60,7 +55,7 @@ function CatalogPage() {
           <CarsList cars={isFiltered ? filteredCars : cars} />
         )}
         {isFiltered && !filteredCars.length && <NoCarsFound />}
-        {!isFiltered && hasMore && <LoadMore />}
+        {!isFiltered && <Pagination />}
       </Container>
     </CatalogSection>
   );
