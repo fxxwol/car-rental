@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import { GrClose } from 'react-icons/gr';
 import variables from '../../common/Variables';
-import { DescText } from '../CarsList/CarsItem/CarsItem.styled';
 
 export const Backdrop = styled.div`
   position: fixed;

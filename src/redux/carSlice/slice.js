@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAllCars } from "./carsThunk";
+import { fetchAllCars, fetchCarsPage } from "./carsThunk";
 
 export const carsSlice = createSlice({
     name: 'cars',
     initialState: {
+        filteredCars: [],
+        allCars: [],
         cars: [],
         filters: {
             make: "",
@@ -11,11 +13,13 @@ export const carsSlice = createSlice({
             startMileage: "",
             endMileage: ""
         },
+        isFiltered: false,
         isLoading: false,
         error: null,
         page: 1,
         limit: 12,
-        hasMore: true
+        hasMore: true,
+        hasMoreFiltered: false
     },
     reducers: {
         setFilters: (state, action) => {
@@ -23,11 +27,18 @@ export const carsSlice = createSlice({
         },
         setPage: (state, action) => {
             state.page = action.payload
+        },
+        setIsFiltered: (state, action) => {
+            state.isFiltered = action.payload
+        },
+        seFilteredCars: (state, action) => {
+            state.filteredCars = action.payload
+            state.hasMoreFiltered = action.payload.length > state.limit
         }
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchAllCars.fulfilled, (state, { payload }) => {
+            .addCase(fetchCarsPage.fulfilled, (state, { payload }) => {
                 let updatedCars;
                 if (state.page === 1) {
                     updatedCars = [...payload];
@@ -41,21 +52,33 @@ export const carsSlice = createSlice({
                     hasMore: payload.length === state.limit
                 }
             })
-            .addCase(fetchAllCars.pending, (state) => {
+            .addCase(fetchCarsPage.pending, (state) => {
                 return {
                     ...state,
                     isLoading: true,
                     error: null
                 }
             })
-            .addCase(fetchAllCars.rejected, (state, { payload }) => {
+            .addCase(fetchCarsPage.rejected, (state, { payload }) => {
                 return {
                     ...state,
                     isLoading: false,
                     error: payload
                 }
             })
+            .addCase(fetchAllCars.fulfilled, (state, { payload }) => {
+                return {
+                    ...state,
+                    allCars: payload
+                }
+            })
+            .addCase(fetchAllCars.rejected, (state, { payload }) => {
+                return {
+                    ...state,
+                    error: payload
+                }
+            })
     }
 });
 
-export const { setFilters, setPage } = carsSlice.actions;
+export const { setFilters, setPage, setIsFiltered, seFilteredCars } = carsSlice.actions;

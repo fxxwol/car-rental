@@ -4,8 +4,8 @@ import { CatalogSection } from './CatalogPage.styled'
 import { Container } from '../../common/Container.styled'
 import CarsList from '../../components/CarsList/CarsList'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllCars } from '../../redux/carSlice/carsThunk'
-import { selectHasMore, selectLoading, selectPage } from '../../redux/carSlice/selectors'
+import { fetchAllCars, fetchCarsPage } from '../../redux/carSlice/carsThunk'
+import { selectHasMore, selectHasMoreFiltered, selectLoading, selectPage, selectisFiltered } from '../../redux/carSlice/selectors'
 import LoadMore from '../../components/LoadMore/LoadMore'
 import  Loader  from '../../components/Loader/Loader'
 
@@ -14,9 +14,13 @@ function CatalogPage() {
   const isLoading = useSelector(selectLoading)
   const page = useSelector(selectPage)
   const hasMore = useSelector(selectHasMore)
+  const isFiltered = useSelector(selectisFiltered)
+  const hasMoreFiltered = useSelector(selectHasMoreFiltered)
+
 
   useEffect(() => {
-    dispatch(fetchAllCars(page));
+     dispatch(fetchAllCars());
+     dispatch(fetchCarsPage(page));
   }, [dispatch, page])
 
   return (
@@ -24,8 +28,9 @@ function CatalogPage() {
       <Container>
         <Filter />
         {isLoading ? <Loader />
-          : <CarsList />}
-        {hasMore && <LoadMore />}
+          : <CarsList/>}
+        {!isFiltered && hasMore && <LoadMore />}
+        {isFiltered && hasMoreFiltered && <LoadMore />}
       </Container>
     </CatalogSection>
   )

@@ -10,7 +10,7 @@ function LoadMore() {
 
   return (
     <LoadMoreBtn type='button' onClick={() => dispatch(setPage(page + 1))}>
-      Load more
+      LoadMore
     </LoadMoreBtn>
   )
 }

@@ -3,8 +3,8 @@ import variables from "../../../common/Variables";
 
 export const Item = styled.li`
 display: flex;
-width: 274px;
-height: 426px;
+width: 280px;
+min-height: 450px;
 flex-direction: column;
 align-items: center;
 `
@@ -25,7 +25,7 @@ export const ImgWrap = styled.div`
 export const CardTitle = styled.div`
 display: flex;
 width: 100%;
-align-items: center;
+align-items: start;
 justify-content: space-between;
 font-size: 16px;
 font-weight: 500;
@@ -39,6 +39,7 @@ color: ${variables.blueText};
 export const TitleMain = styled.div`
 display: flex;
 gap: 5px;
+margin-right: 9px;
 `
 
 export const Description = styled.div`

@@ -22,14 +22,16 @@ import {
     PriceInput
 } from './Filter.styled';
 import { models } from './modelOptions';
-import { selectFilters } from '../../redux/carSlice/selectors';
-import { setFilters } from '../../redux/carSlice/slice';
+import { selectCars, selectFilters } from '../../redux/carSlice/selectors';
+import { seFilteredCars, setFilters, setIsFiltered } from '../../redux/carSlice/slice';
 
 const Filter = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
     const dispatch = useDispatch()
+
+    const allCars = useSelector(selectCars)
     const filters = useSelector(selectFilters)
+
     const minPrice = 30;
     const maxPrice = 500;
     const step = 10;
@@ -46,9 +48,9 @@ const Filter = () => {
         .filter(item => item >= minPrice)
         .map(item => ({ label: item, value: item }));
 
-    const handleSelectModel = selectedModel => {
+    const handleSelectModel = selectedMake => {
         dispatch(setFilters({
-            make: selectedModel
+            make: selectedMake
         }))
         setIsDropdownOpen(false);
     };
@@ -68,8 +70,46 @@ const Filter = () => {
         }
     };
 
-    const handleSearch = () => {
+    const filterCars = (car, filters) => {
+        return Object.entries(filters).every(([param, value]) => {
+            if (param === 'make') {
+                return !value || car[param] === value;
+            }
+            if (param === 'rentalPrice') {
+                value = Number(value)
+                return !value || car[param] <= value;
+            }
+            if (param === 'startMileage' && filters.endMileage !== "") {
+                value = Number(value)
+                return !value || (car["mileage"] >= value && car["mileage"] <= filters.endMileage);
+            }
+            if (param === 'endMileage' && filters.startMileage !== "") {
+                value = Number(value)
+                return !value || (car["mileage"] <= value && car["mileage"] >= filters.startMileage);
+            }
+            if (param === 'startMileage') {
+                value = Number(value)
+                return !value || (car["mileage"] >= value );
+            }
+            if (param === 'endMileage') {
+                value = Number(value)
+                return !value || (car["mileage"] <= value );
+            }
+            return true;
+        });
+    };
 
+    const handleSearch = () => {
+        const filteredCars = allCars.filter((car) => filterCars(car, filters));
+        dispatch(seFilteredCars(filteredCars))
+        dispatch(setIsFiltered(true))
+    };
+
+
+    const handleEnter = (e) => {
+        if (e.code === "Enter") {
+            handleSearch()
+        }
     }
 
     return (
@@ -138,6 +178,7 @@ const Filter = () => {
                             }))}
                             type='number'
                             value={filters.startMileage}
+                            onKeyDown={handleEnter}
                         />
                         <PlaceholderRight>To</PlaceholderRight>
                         <MileageInputRight
@@ -147,10 +188,11 @@ const Filter = () => {
                             onChange={(e) => dispatch(setFilters({
                                 endMileage: e.target.value
                             }))}
+                            onKeyDown={handleEnter}
                         />
                     </MileageInputWrapper>
                 </InputBlock>
-                <Button type='button' onClick={handleSearch}>
+                <Button type='button' onClick={handleSearch} onKeyDown={handleEnter}>
                     Search
                 </Button>
             </InputsBlock>

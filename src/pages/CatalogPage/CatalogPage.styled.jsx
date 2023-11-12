@@ -1,5 +1,5 @@
 import styled from "styled-components";
 
 export const CatalogSection = styled.section`
-    padding: 30px 0;
+    padding: 30px 0 100px;
 `
