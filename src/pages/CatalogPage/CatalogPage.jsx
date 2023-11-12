@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Filter from '../../components/Filter/Filter'
 import { CatalogSection } from './CatalogPage.styled'
 import { Container } from '../../common/Container.styled'
@@ -34,7 +34,7 @@ function CatalogPage() {
   return (
     <CatalogSection>
       <Container>
-        <Filter cars={allCars} filters={filters} onFilter={(val) => dispatch(setFilteredCars(val))} loading={() => dispatch(setIsLoading())} isFiltered={ isFiltered}  changeIsFiltered={(val) => dispatch(setIsFiltered(val))} changeFilters={(val) => dispatch(setFilters(val))} />
+        <Filter cars={allCars} filters={filters} onFilter={(val) => dispatch(setFilteredCars(val))}  isFiltered={ isFiltered}  changeIsFiltered={(val) => dispatch(setIsFiltered(val))} changeFilters={(val) => dispatch(setFilters(val))} />
         {isLoading ? <Loader /> :
           <CarsList cars={isFiltered ? filteredCars : cars} />}
         {isFiltered && !filteredCars.length && <NoCarsFound />}
