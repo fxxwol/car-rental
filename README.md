@@ -4,6 +4,7 @@
  - [Redux](https://redux.js.org/) (for state management)
  - [Styled-components](https://www.styled-components.com/) (for styling)
  - [Mock API](https://mockapi.io/) (for saving cars data)
+ - [Netlify](https://www.netlify.com/) (for deploying)
 
 
 ## Figma
