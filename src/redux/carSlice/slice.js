@@ -33,9 +33,9 @@ export const carsSlice = createSlice({
         setIsLoading: (state, action) => {
             state.isLoading = action.payload
         },
-        seFilteredCars: (state, action) => {
+        setFilteredCars: (state, action) => {
             state.filteredCars = action.payload
-        }
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -82,4 +82,4 @@ export const carsSlice = createSlice({
     }
 });
 
-export const { setFilters, setPage, setIsFiltered, setIsLoading, seFilteredCars } = carsSlice.actions;
+export const { setFilters, setFilteredCars, setPage, setIsFiltered, setIsLoading } = carsSlice.actions;

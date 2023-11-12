@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '../../common/Button.styled';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
     ArrowBtn,
     ArrowDown,
@@ -23,18 +23,13 @@ import {
     PriceInput
 } from './Filter.styled';
 import { models } from './modelOptions';
-import { selectAllCars, selectFilters, selectisFiltered } from '../../redux/carSlice/selectors';
-import { seFilteredCars, setFilters, setIsFiltered } from '../../redux/carSlice/slice';
 import { useSearchParams } from 'react-router-dom';
 
-const Filter = () => {
+
+const Filter = ({ cars, filters, onFilter, loading, isFiltered,  changeIsFiltered, changeFilters }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [error, setError] = useState(null);
     const [searchParams, setSearchParams] = useSearchParams()
-    const allCars = useSelector(selectAllCars)
-    const filters = useSelector(selectFilters)
-    const isFiltered = useSelector(selectisFiltered)
-
     const dispatch = useDispatch()
 
     const minPrice = 30;
@@ -54,16 +49,12 @@ const Filter = () => {
         .map(item => ({ label: item, value: item }));
 
     const handleSelectModel = selectedMake => {
-        dispatch(setFilters({
-            make: selectedMake
-        }))
+        changeFilters({ make: selectedMake});
         setIsDropdownOpen(false);
     };
 
     const handleSelectPrice = selectedPrice => {
-        dispatch(setFilters({
-            rentalPrice: selectedPrice
-        }))
+        changeFilters({rentalPrice: selectedPrice });
         setIsDropdownOpen(false);
     };
 
@@ -104,7 +95,7 @@ const Filter = () => {
         });
     };
 
-    const areFiltersEmpty = (filters) => {
+    const areFiltersEmpty = () => {
         for (const key in filters) {
             if (filters.hasOwnProperty(key) && filters[key]) {
                 return false;
@@ -114,7 +105,8 @@ const Filter = () => {
     };
 
     const handleSearch = () => {
-        if (areFiltersEmpty(filters)) {
+        loading(true)
+        if (areFiltersEmpty()) {
             setSearchParams({})
             return;
         }
@@ -132,9 +124,10 @@ const Filter = () => {
             setError(null)
         }
         setSearchParams({ ...filters })
-        const filteredCars = allCars.filter((car) => filterCars(car, filters));
-        dispatch(seFilteredCars(filteredCars))
-        dispatch(setIsFiltered(true))
+        const filteredCars = cars.filter((car) => filterCars(car, filters));
+        onFilter(filteredCars)
+        loading(false)
+        changeIsFiltered(true)
     };
 
 
@@ -145,11 +138,15 @@ const Filter = () => {
     }
 
     const handleReset = () => {
-        dispatch(setFilters({
-            make: '', rentalPrice: '', startMileage: '', endMileage: ''
-        }))
+        changeFilters({
+            make: "",
+            rentalPrice: "",
+            startMileage: "",
+            endMileage: ""
+        })
+
         setSearchParams({})
-        dispatch(setIsFiltered(false))
+        changeIsFiltered(false)
     }
 
     return (
@@ -215,7 +212,7 @@ const Filter = () => {
                         <PlaceholderLeft>From</PlaceholderLeft>
                         <MileageInputLeft
                             id="mileageTitle"
-                            onChange={(e) => dispatch(setFilters({
+                            onChange={(e) => dispatch(changeFilters({
                                 startMileage: e.target.value
                             }))}
                             type='number'
@@ -229,7 +226,7 @@ const Filter = () => {
                             type='number'
                             value={filters.endMileage}
                             onChange={(e) => {
-                                dispatch(setFilters({
+                                dispatch(changeFilters({
                                     endMileage: e.target.value
                                 }))
                             }}

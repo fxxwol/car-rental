@@ -1,9 +1,9 @@
 import { Message, NoCarsFoundContainer } from './NoCars.styled'
 
-const NoCarsFound = () => {
+const NoCarsFound = ({message }) => {
     return (
         <NoCarsFoundContainer>
-            <Message>No cars were found :(</Message>
+            <Message> {message || "No cars were found :("}</Message>
         </NoCarsFoundContainer>
     );
 };
