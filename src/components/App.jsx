@@ -5,7 +5,6 @@ import Layout from './Layout/Layout';
 const HomePage = lazy(() => import('../pages/HomePage'));
 const CatalogPage = lazy(() => import('../pages/CatalogPage/CatalogPage'));
 const FavoritesPage = lazy(() => import('../pages/FavoritesPage'));
-// const NotFoundPage = lazy(() => import('../pages/NotFound/NotFound'));
 
 function App() {
   return (

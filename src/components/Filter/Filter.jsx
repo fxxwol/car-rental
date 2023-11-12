@@ -105,18 +105,16 @@ const Filter = () => {
     };
 
     const handleSearch = () => {
-        console.log(filters.startMileage)
-        if (filters.startMileage < 500 ) {
+            if (filters.startMileage && filters.startMileage < 500 ) {
             setError("Mileage should be greater than 500")
             return;
-        } else if (filters.endMileage < 500) { 
+            } else if (filters.endMileage && filters.endMileage < 500) { 
             setError("Mileage should be greater than 500")
             return;
-        } else if (filters.startMileage > filters.endMileage) { 
+            } else if (filters.startMileage && filters.endMileage && filters.startMileage > filters.endMileage) { 
             setError("Number in To field should be greater than From")
             return;
         } else {
-            console.log(false)
             setError(null)
         }
         setSearchParams({ ...filters })

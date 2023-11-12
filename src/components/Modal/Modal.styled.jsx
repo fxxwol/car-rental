@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import comingsoon from '../../img/comingsoon.jpg'
 import variables from '../../common/Variables';
 
 export const Backdrop = styled.div`
@@ -24,7 +25,7 @@ export const ModalContainer = styled.div`
   width: 541px;
   z-index: 100;
   border-radius: 24px;
-  max-height: 752px;
+  max-height: 700px;
   overflow-y: auto;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 
@@ -75,6 +76,9 @@ export const CarImg = styled.img`
   height: 248px;
   object-fit: cover;
   border-radius: 14px;
+  background: url(${comingsoon});
+    background-repeat: no-repeat;
+    background-size: contain;
 `;
 
 export const InfoWrapper = styled.div`
