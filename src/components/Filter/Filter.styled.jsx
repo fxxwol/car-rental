@@ -69,6 +69,17 @@ export const Label = styled.label`
   margin-bottom: 8px;
 `;
 
+export const ErrorMsg = styled.p`
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #ae1010;
+  margin-top: 8px;
+  position: absolute;
+  bottom: -25px;
+z-index: 15;
+`;
+
 export const Input = styled.input`
   padding: 14px;
   border-radius: 14px;
@@ -144,8 +155,9 @@ export const OptionListItem = styled.li`
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 
-  &:hover {
+  &:hover, &.active{
     color: rgba(18, 20, 23, 0.8);
+    font-weight: 600; 
   }
 `;
 

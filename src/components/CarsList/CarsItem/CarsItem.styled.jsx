@@ -6,6 +6,7 @@ display: flex;
 width: 280px;
 min-height: 450px;
 flex-direction: column;
+justify-content: space-between;
 align-items: center;
 `
 

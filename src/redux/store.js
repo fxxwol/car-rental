@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import {
     persistStore,
-    // persistReducer,
+    persistReducer,
     FLUSH,
     REHYDRATE,
     PAUSE,
@@ -9,8 +9,10 @@ import {
     PURGE,
     REGISTER,
 } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
+import storage from 'redux-persist/lib/storage';
 import { carsSlice } from './carSlice/slice';
+import msgpack from 'msgpack-lite';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
 // const authPersistConfig = {
 //     key: 'auth',
@@ -18,11 +20,27 @@ import { carsSlice } from './carSlice/slice';
 //     whitelist: ['token'],
 // };
 
+const carsPersistConfig = {
+    key: 'car',
+    storage,
+    whitelist: ['filteredCars', 'isFiltered', 'filters'],
+    transforms: [
+        {
+            in: (state) => {
+                return msgpack.encode(state);
+            },
+            out: (state) => {
+                return msgpack.decode(state);
+            },
+        },
+    ],
+    stateReconciler: autoMergeLevel2,
+};
+
 export const store = configureStore({
     reducer: {
-        cars: carsSlice.reducer,
+        cars: persistReducer(carsPersistConfig, carsSlice.reducer),
         // favoritre: fav.reducer,
-        // auth: persistReducer(authPersistConfig, authSlice.reducer),
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({

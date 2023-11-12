@@ -19,7 +19,6 @@ export const carsSlice = createSlice({
         page: 1,
         limit: 12,
         hasMore: true,
-        hasMoreFiltered: false
     },
     reducers: {
         setFilters: (state, action) => {
@@ -31,9 +30,11 @@ export const carsSlice = createSlice({
         setIsFiltered: (state, action) => {
             state.isFiltered = action.payload
         },
+        setIsLoading: (state, action) => {
+            state.isLoading = action.payload
+        },
         seFilteredCars: (state, action) => {
             state.filteredCars = action.payload
-            state.hasMoreFiltered = action.payload.length > state.limit
         }
     },
     extraReducers: (builder) => {
@@ -81,4 +82,4 @@ export const carsSlice = createSlice({
     }
 });
 
-export const { setFilters, setPage, setIsFiltered, seFilteredCars } = carsSlice.actions;
+export const { setFilters, setPage, setIsFiltered, setIsLoading, seFilteredCars } = carsSlice.actions;

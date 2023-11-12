@@ -23,9 +23,9 @@ export const ModalContainer = styled.div`
   border-radius: 24px;
   width: 541px;
   z-index: 100;
-  overflow-y: auto;
   border-radius: 24px;
   max-height: 752px;
+  overflow-y: auto;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 
 &::-webkit-scrollbar {

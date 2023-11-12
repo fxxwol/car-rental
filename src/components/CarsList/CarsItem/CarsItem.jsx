@@ -27,40 +27,42 @@ function CarsItem({ car }) {
 
     return (
         <Item>
-            <ImgWrap>
-                <HeartBtn onClick={handleFavorite}>
-                    {isClicked ?
-                        <HeartIcon>
-                            <use href={`${sprite}#icon-activeheart`} />
-                        </HeartIcon> :
-                        <HeartIcon>
-                            <use href={`${sprite}#icon-normalheart`} />
-                        </HeartIcon>
-                    }
-
-                </HeartBtn>
-                <CarImg src={img} alt={`${make} ${model} ${year}`} />
-            </ImgWrap>
-            <CardTitle>
-                <TitleMain>
-                    {make}
-                    <CarModel>
-                        {model}
-                        <span style={{ color: variables.blackText }}>,</span>
-                    </CarModel>
-                    {year}
-                </TitleMain>
-                {rentalPrice}$
-            </CardTitle>
-            <Description>
-                <DescText>{city}</DescText>
-                <DescText>{country}</DescText>
-                <DescText>{rentalCompany}</DescText>
-                <DescText>{model}</DescText>
-                <DescText>{make}</DescText>
-                <DescText>{id}</DescText>
-                <DescText>{functionalities[0]}</DescText>
-            </Description>
+            <div>
+                <ImgWrap>
+                    <HeartBtn onClick={handleFavorite}>
+                        {isClicked ?
+                            <HeartIcon>
+                                <use href={`${sprite}#icon-activeheart`} />
+                            </HeartIcon> :
+                            <HeartIcon>
+                                <use href={`${sprite}#icon-normalheart`} />
+                            </HeartIcon>
+                        }
+    
+                    </HeartBtn>
+                    <CarImg src={img} alt={`${make} ${model} ${year}`} />
+                </ImgWrap>
+                <CardTitle>
+                    <TitleMain>
+                        {make}
+                        <CarModel>
+                            {model}
+                            <span style={{ color: variables.blackText }}>,</span>
+                        </CarModel>
+                        {year}
+                    </TitleMain>
+                    {rentalPrice}$
+                </CardTitle>
+                <Description>
+                    <DescText>{city}</DescText>
+                    <DescText>{country}</DescText>
+                    <DescText>{rentalCompany}</DescText>
+                    <DescText>{model}</DescText>
+                    <DescText>{make}</DescText>
+                    <DescText>{id}</DescText>
+                    <DescText>{functionalities[0]}</DescText>
+                </Description>
+            </div>
             <Button type="button" width={274} height={44} onClick={openModal}>
                 Learn more
             </Button>

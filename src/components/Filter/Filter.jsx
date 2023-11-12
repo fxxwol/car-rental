@@ -5,6 +5,7 @@ import {
     ArrowBtn,
     ArrowDown,
     ArrowUp,
+    ErrorMsg,
     FilterSectionContainer,
     InputBlock,
     InputsBlock,
@@ -22,16 +23,20 @@ import {
     PriceInput
 } from './Filter.styled';
 import { models } from './modelOptions';
-import { selectCars, selectFilters } from '../../redux/carSlice/selectors';
+import { selectAllCars, selectFilters, selectisFiltered } from '../../redux/carSlice/selectors';
 import { seFilteredCars, setFilters, setIsFiltered } from '../../redux/carSlice/slice';
+import { useSearchParams } from 'react-router-dom';
 
 const Filter = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const dispatch = useDispatch()
-
-    const allCars = useSelector(selectCars)
+    const [error, setError] = useState(null);
+    const [searchParams, setSearchParams] = useSearchParams()
+    const allCars = useSelector(selectAllCars)
     const filters = useSelector(selectFilters)
+    const isFiltered = useSelector(selectisFiltered)
 
+    const dispatch = useDispatch()
+    
     const minPrice = 30;
     const maxPrice = 500;
     const step = 10;
@@ -89,17 +94,32 @@ const Filter = () => {
             }
             if (param === 'startMileage') {
                 value = Number(value)
-                return !value || (car["mileage"] >= value );
+                return !value || (car["mileage"] >= value);
             }
             if (param === 'endMileage') {
                 value = Number(value)
-                return !value || (car["mileage"] <= value );
+                return !value || (car["mileage"] <= value);
             }
             return true;
         });
     };
 
     const handleSearch = () => {
+        console.log(filters.startMileage)
+        if (filters.startMileage < 500 ) {
+            setError("Mileage should be greater than 500")
+            return;
+        } else if (filters.endMileage < 500) { 
+            setError("Mileage should be greater than 500")
+            return;
+        } else if (filters.startMileage > filters.endMileage) { 
+            setError("Number in To field should be greater than From")
+            return;
+        } else {
+            console.log(false)
+            setError(null)
+        }
+        setSearchParams({ ...filters })
         const filteredCars = allCars.filter((car) => filterCars(car, filters));
         dispatch(seFilteredCars(filteredCars))
         dispatch(setIsFiltered(true))
@@ -110,6 +130,13 @@ const Filter = () => {
         if (e.code === "Enter") {
             handleSearch()
         }
+    }
+
+    const handleReset = () => {
+        dispatch(setFilters({
+            make: '', rentalPrice: '', startMileage: '', endMileage: ''
+        }))
+        dispatch(setIsFiltered(false))
     }
 
     return (
@@ -132,8 +159,9 @@ const Filter = () => {
                                 {models.map((option, idx) => (
                                     <OptionListItem
                                         key={idx}
+                                        className={option === filters.make ? 'active' : ''}
                                         onClick={() => handleSelectModel(option)}
-                                    >
+                                        >
                                         {option}
                                     </OptionListItem>
                                 ))}
@@ -158,6 +186,7 @@ const Filter = () => {
                                 {priceOptions.map((option, idx) => (
                                     <OptionListItem
                                         key={idx}
+                                        className={option.label === filters.rentalPrice ? 'active' : ''}
                                         onClick={() => handleSelectPrice(option.value)}
                                     >
                                         {option.label}
@@ -179,22 +208,30 @@ const Filter = () => {
                             type='number'
                             value={filters.startMileage}
                             onKeyDown={handleEnter}
+                            min="500"
                         />
                         <PlaceholderRight>To</PlaceholderRight>
                         <MileageInputRight
                             id="mileageTitle"
                             type='number'
                             value={filters.endMileage}
-                            onChange={(e) => dispatch(setFilters({
-                                endMileage: e.target.value
-                            }))}
+                            onChange={(e) => {
+                                    dispatch(setFilters({
+                                        endMileage: e.target.value
+                                    }))
+                            }}
                             onKeyDown={handleEnter}
-                        />
+                            min="500"
+                            />
+                        {error && <ErrorMsg>{error }</ErrorMsg>}
                     </MileageInputWrapper>
                 </InputBlock>
                 <Button type='button' onClick={handleSearch} onKeyDown={handleEnter}>
                     Search
                 </Button>
+                {isFiltered && <Button type='button' onClick={handleReset}>
+                    Reset
+                </Button>}
             </InputsBlock>
         </FilterSectionContainer>
     );

@@ -2,10 +2,10 @@ import React from 'react'
 import CarsItem from './CarsItem/CarsItem'
 import { CardsList } from './CarsList.styled'
 import { useSelector } from 'react-redux'
-import { selectAllCars, selectFilteredCars, selectisFiltered } from '../../redux/carSlice/selectors'
+import { selectPageCars, selectFilteredCars, selectisFiltered } from '../../redux/carSlice/selectors'
 
 function CarsList() {
-    const cars = useSelector(selectAllCars)
+    const cars = useSelector(selectPageCars)
     const filteredCars = useSelector(selectFilteredCars)
     const isFiltered = useSelector(selectisFiltered)
     return (
