@@ -36,7 +36,7 @@ const Filter = () => {
     const isFiltered = useSelector(selectisFiltered)
 
     const dispatch = useDispatch()
-    
+
     const minPrice = 30;
     const maxPrice = 500;
     const step = 10;
@@ -104,14 +104,28 @@ const Filter = () => {
         });
     };
 
+    const areFiltersEmpty = (filters) => {
+        for (const key in filters) {
+            if (filters.hasOwnProperty(key) && filters[key]) {
+                return false;
+            }
+        }
+        return true;
+    };
+
     const handleSearch = () => {
-            if (filters.startMileage && filters.startMileage < 500 ) {
+        if (areFiltersEmpty(filters)) {
+            setSearchParams({})
+            return;
+        }
+
+        if (filters.startMileage && filters.startMileage < 500) {
             setError("Mileage should be greater than 500")
             return;
-            } else if (filters.endMileage && filters.endMileage < 500) { 
+        } else if (filters.endMileage && filters.endMileage < 500) {
             setError("Mileage should be greater than 500")
             return;
-            } else if (filters.startMileage && filters.endMileage && filters.startMileage > filters.endMileage) { 
+        } else if (filters.startMileage && filters.endMileage && filters.startMileage > filters.endMileage) {
             setError("Number in To field should be greater than From")
             return;
         } else {
@@ -134,6 +148,7 @@ const Filter = () => {
         dispatch(setFilters({
             make: '', rentalPrice: '', startMileage: '', endMileage: ''
         }))
+        setSearchParams({})
         dispatch(setIsFiltered(false))
     }
 
@@ -159,7 +174,7 @@ const Filter = () => {
                                         key={idx}
                                         className={option === filters.make ? 'active' : ''}
                                         onClick={() => handleSelectModel(option)}
-                                        >
+                                    >
                                         {option}
                                     </OptionListItem>
                                 ))}
@@ -214,14 +229,14 @@ const Filter = () => {
                             type='number'
                             value={filters.endMileage}
                             onChange={(e) => {
-                                    dispatch(setFilters({
-                                        endMileage: e.target.value
-                                    }))
+                                dispatch(setFilters({
+                                    endMileage: e.target.value
+                                }))
                             }}
                             onKeyDown={handleEnter}
                             min="500"
-                            />
-                        {error && <ErrorMsg>{error }</ErrorMsg>}
+                        />
+                        {error && <ErrorMsg>{error}</ErrorMsg>}
                     </MileageInputWrapper>
                 </InputBlock>
                 <Button type='button' onClick={handleSearch} onKeyDown={handleEnter}>

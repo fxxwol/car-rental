@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import variables from "../../../common/Variables";
-import comingsoon from '../../../img/comingsoon.jpg'
 
 export const Item = styled.li`
 display: flex;
@@ -12,9 +11,6 @@ align-items: center;
 `
 
 export const CarImg = styled.img`
-    background: url(${comingsoon});
-    background-repeat: no-repeat;
-    background-size: contain;
     width: 100%;
 height: 268px;
 object-fit: cover;

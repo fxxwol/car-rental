@@ -4,14 +4,21 @@ import variables from '../../../common/Variables'
 import { Button } from "../../../common/Button.styled"
 import sprite from '../../../img/sprite.svg'
 import Modal from '../../Modal/Modal'
+import comingsoon from '../../../img/comingsoon.jpg'
+import { useDispatch, useSelector } from 'react-redux'
+import { addToFavoriteList, removeFavoriteList } from '../../../redux/favoriteSlice/slice'
 
 function CarsItem({ car }) {
-    const [isClicked, setIsClicked] = useState(false)
+    // const [isClicked, setIsClicked] = useState(false)
     const { img, make, model, year, address, rentalPrice, rentalCompany, id, functionalities } = car
     const addressParts = address.split(', ');
+    const favorite = useSelector(state => state.favorite.favorites);
     const city = addressParts[1];
     const country = addressParts[2];
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const dispatch = useDispatch()
+    const favoriteStatus = favorite.includes(id);
+
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -22,7 +29,7 @@ function CarsItem({ car }) {
     };
 
     const handleFavorite = () => {
-        setIsClicked(prev => !prev)
+        favoriteStatus ? dispatch(removeFavoriteList(id)) : dispatch(addToFavoriteList(id))
     }
 
     return (
@@ -30,7 +37,7 @@ function CarsItem({ car }) {
             <div>
                 <ImgWrap>
                     <HeartBtn onClick={handleFavorite}>
-                        {isClicked ?
+                        {favoriteStatus ?
                             <HeartIcon>
                                 <use href={`${sprite}#icon-activeheart`} />
                             </HeartIcon> :
@@ -38,9 +45,14 @@ function CarsItem({ car }) {
                                 <use href={`${sprite}#icon-normalheart`} />
                             </HeartIcon>
                         }
-    
                     </HeartBtn>
-                    <CarImg src={img} alt={`${make} ${model} ${year}`} />
+                    <CarImg src={img} alt={`${make} ${model} ${year}`}
+                        onError={ e => {
+                            e.target.src = `${comingsoon}`
+                            e.onError = null
+                        }
+                    }
+                    />
                 </ImgWrap>
                 <CardTitle>
                     <TitleMain>

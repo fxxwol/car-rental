@@ -13,12 +13,12 @@ import storage from 'redux-persist/lib/storage';
 import { carsSlice } from './carSlice/slice';
 import msgpack from 'msgpack-lite';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import { favoriteSlice } from './favoriteSlice/slice';
 
-// const authPersistConfig = {
-//     key: 'auth',
-//     storage,
-//     whitelist: ['token'],
-// };
+const favoritePersistConfig = {
+    key: 'favorite',
+    storage
+};
 
 const carsPersistConfig = {
     key: 'car',
@@ -40,7 +40,7 @@ const carsPersistConfig = {
 export const store = configureStore({
     reducer: {
         cars: persistReducer(carsPersistConfig, carsSlice.reducer),
-        // favoritre: fav.reducer,
+        favorite: persistReducer(favoritePersistConfig, favoriteSlice.reducer),
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({
