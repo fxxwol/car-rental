@@ -4,6 +4,7 @@ import AppBar from "../AppBar/AppBar";
 import Footer from "../Footer/Footer";
 import { Main } from "./Layout.styled";
 import Loader from "../Loader/Loader";
+import ScrollBtn from "../ScrollBtn/ScrollBtn";
 
 function Layout() {
   return (
@@ -13,6 +14,7 @@ function Layout() {
         <Suspense fallback={<Loader />}>
           <Outlet />
         </Suspense>
+        <ScrollBtn/>
       </Main>
       <Footer />
     </>
