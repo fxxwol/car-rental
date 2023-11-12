@@ -1,6 +1,6 @@
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
-import styled from 'styled-components';
-import variables from '../../common/Variables';
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
+import styled from "styled-components";
+import variables from "../../common/Variables";
 
 export const FilterSectionContainer = styled.section`
   display: flex;
@@ -24,10 +24,10 @@ export const InputBlock = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  `;
+`;
 
 export const Dropdown = styled.div`
-    position: absolute;
+  position: absolute;
   display: flex;
   flex-direction: column;
   top: 100%;
@@ -50,8 +50,7 @@ export const Dropdown = styled.div`
   &::-webkit-scrollbar-thumb:hover {
     background-color: ${variables.greyText};
   }
-
-`
+`;
 export const ModelDropdown = styled(Dropdown)`
   width: 252px;
   max-height: 272px;
@@ -77,7 +76,7 @@ export const ErrorMsg = styled.p`
   margin-top: 8px;
   position: absolute;
   bottom: -25px;
-z-index: 15;
+  z-index: 15;
 `;
 
 export const Input = styled.input`
@@ -96,7 +95,7 @@ export const Input = styled.input`
   &::placeholder {
     color: ${variables.blackText};
   }
-`
+`;
 export const ModelInput = styled(Input)`
   width: 252px;
 `;
@@ -127,15 +126,13 @@ export const ArrowBtn = styled.button`
   outline: none;
 `;
 
-
 export const PriceDropdown = styled(Dropdown)`
   width: 145px;
   max-height: 188px;
- 
+
   &::-webkit-scrollbar {
     height: 66px;
   }
-
 `;
 
 export const OptionList = styled.ul`
@@ -155,9 +152,10 @@ export const OptionListItem = styled.li`
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 
-  &:hover, &.active{
+  &:hover,
+  &.active {
     color: rgba(18, 20, 23, 0.8);
-    font-weight: 600; 
+    font-weight: 600;
   }
 `;
 
@@ -179,26 +177,26 @@ export const MileageInputLeft = styled(Input)`
   border-radius: 0;
   border-top-left-radius: 14px;
   border-bottom-left-radius: 14px;
-  border-right: 1px solid rgba(138, 138, 137, 0.20);
+  border-right: 1px solid rgba(138, 138, 137, 0.2);
   cursor: text;
-  `;
+`;
 
 export const PlaceholderLeft = styled.span`
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 111.111%;
-  `
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 111.111%;
+`;
 export const PlaceholderRight = styled.span`
-    position: absolute;
-    top: 14px;
-    left: 174px;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 111.111%;
-  `
+  position: absolute;
+  top: 14px;
+  left: 174px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 111.111%;
+`;
 
 export const MileageInputRight = styled(Input)`
   width: 160px;

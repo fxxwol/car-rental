@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const NoCarsFoundContainer = styled.div`
   text-align: center;

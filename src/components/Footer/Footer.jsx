@@ -1,7 +1,20 @@
-import React from 'react'
-import sprite from '../../img/sprite.svg'
-import { Address, ContactsWrapper, Copyright, CopyrightLink, FooterContainer, FooterTitle, FooterWrap, Link, LinksWrap, SocialIcon, SocialWrapper, Wrapper } from './Footer.styled'
-import Logo from '../../common/Logo/Logo'
+import React from "react";
+import sprite from "../../img/sprite.svg";
+import {
+  Address,
+  ContactsWrapper,
+  Copyright,
+  CopyrightLink,
+  FooterContainer,
+  FooterTitle,
+  FooterWrap,
+  Link,
+  LinksWrap,
+  SocialIcon,
+  SocialWrapper,
+  Wrapper,
+} from "./Footer.styled";
+import Logo from "../../common/Logo/Logo";
 function Footer() {
   return (
     <FooterWrap>
@@ -14,7 +27,9 @@ function Footer() {
               <svg width={20} height={20}>
                 <use href={`${sprite}#icon-email`} />
               </svg>
-              <Link href="mLinkilto:driveLinkse@gmail.com">drivease@gmail.com</Link>
+              <Link href="mLinkilto:driveLinkse@gmail.com">
+                drivease@gmail.com
+              </Link>
             </ContactsWrapper>
             <ContactsWrapper>
               <svg width={20} height={20}>
@@ -27,9 +42,15 @@ function Footer() {
         <Wrapper>
           <FooterTitle>Quick Links</FooterTitle>
           <LinksWrap>
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/catalog">Catalog</Link></li>
-            <li><Link href="/favorites">Favorites</Link></li>
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/catalog">Catalog</Link>
+            </li>
+            <li>
+              <Link href="/favorites">Favorites</Link>
+            </li>
           </LinksWrap>
         </Wrapper>
         <Wrapper>
@@ -54,10 +75,18 @@ function Footer() {
         </Wrapper>
       </FooterContainer>
       <Copyright>
-        <p>&copy; 2023 Car Rental Service. All rights reserved. Developed by <CopyrightLink target="_blank" href="https://www.linkedin.com/in/roksolana-protsiv/">Roksolana Protsiv</CopyrightLink></p>
+        <p>
+          &copy; 2023 Car Rental Service. All rights reserved. Developed by{" "}
+          <CopyrightLink
+            target="_blank"
+            href="https://www.linkedin.com/in/roksolana-protsiv/"
+          >
+            Roksolana Protsiv
+          </CopyrightLink>
+        </p>
       </Copyright>
     </FooterWrap>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

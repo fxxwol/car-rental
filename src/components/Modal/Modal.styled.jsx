@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import comingsoon from '../../img/comingsoon.jpg'
-import variables from '../../common/Variables';
+import styled from "styled-components";
+import comingsoon from "../../img/comingsoon.jpg";
+import variables from "../../common/Variables";
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -29,7 +29,7 @@ export const ModalContainer = styled.div`
   overflow-y: auto;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 
-&::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     width: 8px;
   }
 
@@ -41,14 +41,12 @@ export const ModalContainer = styled.div`
   &::-webkit-scrollbar-thumb:hover {
     background-color: ${variables.greyText};
   }
-
-  `;
+`;
 
 export const ContentContainer = styled.div`
-position: relative;
+  position: relative;
   padding: 40px 35px;
-
-`
+`;
 
 export const BtnClose = styled.button`
   position: absolute;
@@ -77,8 +75,8 @@ export const CarImg = styled.img`
   object-fit: cover;
   border-radius: 14px;
   background: url(${comingsoon});
-    background-repeat: no-repeat;
-    background-size: contain;
+  background-repeat: no-repeat;
+  background-size: contain;
 `;
 
 export const InfoWrapper = styled.div`
@@ -150,5 +148,3 @@ export const RentalItem = styled.li`
     letter-spacing: -0.24px;
   }
 `;
-
-

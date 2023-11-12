@@ -1,8 +1,7 @@
-import 'modern-normalize';
-import { createGlobalStyle } from 'styled-components'
-import variables from './Variables';
-import Manrope from '../fonts/Manrope.woff2';
-
+import "modern-normalize";
+import { createGlobalStyle } from "styled-components";
+import variables from "./Variables";
+import Manrope from "../fonts/Manrope.woff2";
 
 export const GlobalStyle = createGlobalStyle`
 @font-face {
@@ -60,5 +59,4 @@ button {
 html {
   scroll-behavior: smooth;
 }
-
 `;

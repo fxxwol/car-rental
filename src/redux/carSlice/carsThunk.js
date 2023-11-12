@@ -10,7 +10,7 @@ export const fetchCarsPage = createAsyncThunk(
         try {
             const res = await axios.get('/adverts', {
                 params: {
-                    page, 
+                    page,
                     limit: 12
                 }
             });

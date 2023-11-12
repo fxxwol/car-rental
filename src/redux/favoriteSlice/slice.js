@@ -4,7 +4,7 @@ export const favoriteSlice = createSlice({
     name: 'favorite',
     initialState: {
         favorites: [],
-        favFiltered:[],
+        favFiltered: [],
         favFilters: {
             make: "",
             rentalPrice: "",
