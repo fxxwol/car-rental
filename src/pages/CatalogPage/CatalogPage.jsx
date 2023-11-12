@@ -21,7 +21,6 @@ import NoCarsFound from "../../components/NoCars/NoCars";
 import {
   setFilteredCars,
   setFilters,
-  setIsLoading,
 } from "../../redux/carSlice/slice";
 import { setIsFiltered } from "../../redux/carSlice/slice";
 function CatalogPage() {

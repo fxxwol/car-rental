@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllCars, selectLoading } from "../redux/carSlice/selectors";
 import { Container } from "../common/Container.styled";
@@ -54,7 +54,7 @@ function FavoritesPage() {
             <CarsList cars={isFavFiltered ? favFiltered : favoriteCars} />
           )}
           {isFavFiltered && !favFiltered.length && <NoCarsFound />}
-          {!favoriteCars && (
+          {!isFavFiltered && !favoriteCars.length && (
             <NoCarsFound message={"You don't have any favorites yet"} />
           )}
         </FavsListSection>
