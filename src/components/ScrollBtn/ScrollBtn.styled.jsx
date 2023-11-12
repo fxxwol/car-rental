@@ -9,9 +9,9 @@ export const TopBtn = styled.button`
   width: 60px;
   position: fixed;
   bottom: 50px;
-  right: 40px;
+  right: 30px;
+  z-index: 50;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-
   transition: all 280ms cubic-bezier(0.075, 0.82, 0.165, 1);
 
   &:hover,
